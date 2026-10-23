@@ -4,7 +4,1088 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1020">
-<title>Reza Study — برنامه مطالعاتی</title>
+<title>Reza Study — برنامه مطالعاتی</title><!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه‌ریز کنکور ارشد اقتصاد | منابع ماهان (۱۴۰۶)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#f5f7ff',
+                            100: '#edeefd',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#1e1b4b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.6); }
+
+        input[type=range].scrubber-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 999px;
+            background: #334155;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #6366f1;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+            margin-top: -7px;
+            transition: transform 0.15s ease;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+        @keyframes subtle-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        }
+        .today-card-glow { animation: subtle-pulse 2.5s infinite; }
+
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Minimal Navigation -->
+    <header class="sticky top-0 z-40 glass-panel bg-slate-900/80 border-b border-slate-800 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-white text-base shadow-md shadow-brand-500/20">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+                <h1 class="text-sm sm:text-base font-black tracking-tight text-white">برنامه‌ریز ارشد اقتصاد ماهان</h1>
+                <p class="text-[11px] text-slate-400">کنکور ۱۶ اردیبهشت ۱۴۰۶ • اتمام برنامه ۱۰ اردیبهشت</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap justify-end">
+            <button onclick="toggleEditMode()" id="editModeBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-bold flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-pen-to-square text-brand-400"></i>
+                <span id="editModeText">حالت ویرایش</span>
+            </button>
+
+            <button onclick="openCloudSyncModal()" class="px-3 py-1.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/20 text-xs font-bold flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-cloud" id="cloudSyncIcon"></i>
+                <span id="cloudSyncText">ذخیره‌سازی اطلاعات</span>
+            </button>
+
+            <button onclick="toggleTheme()" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 flex items-center justify-center text-xs transition">
+                <i class="fa-solid fa-sun" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+
+        <!-- ======================================================= -->
+        <!-- 1. LIVE COUNTDOWN & PACING STATUS                       -->
+        <!-- ======================================================= -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+            <!-- Countdown (7 cols) -->
+            <div class="md:col-span-7 bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 flex items-center justify-between gap-3">
+                <div>
+                    <span class="text-[11px] font-bold text-rose-400 flex items-center gap-1.5 mb-1">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                        <span>روزشمار معکوس تا کنکور (۱۶ اردیبهشت ۱۴۰۶)</span>
+                    </span>
+                    <div class="flex items-baseline gap-1 sm:gap-2 mt-1">
+                        <span class="text-2xl sm:text-3xl font-black text-white" id="cdDays">000</span>
+                        <span class="text-xs text-slate-400">روز</span>
+                        <span class="text-lg font-bold text-slate-200" id="cdHours">00</span><span class="text-xs text-slate-400">ساعت</span>
+                        <span class="text-lg font-bold text-slate-200" id="cdMinutes">00</span><span class="text-xs text-slate-400">دقیقه</span>
+                        <span class="text-sm font-bold text-rose-300" id="cdSeconds">00</span><span class="text-xs text-slate-400">ثانیه</span>
+                    </div>
+                </div>
+                <div class="text-left text-xs text-slate-400 border-r border-slate-700/80 pr-3 sm:pr-4">
+                    <span class="block text-[10px] opacity-80">پایان برنامه ۶ روز قبل:</span>
+                    <strong class="text-emerald-400 font-bold">۱۰ اردیبهشت</strong>
+                </div>
+            </div>
+
+            <!-- Pace Status (5 cols) -->
+            <div class="md:col-span-5 bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold text-slate-400 block mb-0.5">وضعیت همگامی با برنامه</span>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span id="paceStatusBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            همگام با برنامه ✓
+                        </span>
+                        <span class="text-xs text-slate-400" id="paceSubtitleText">وزن ۶۵-۲۵-۱۰</span>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <button onclick="adjustPaceScore(1)" class="w-7 h-7 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs font-bold text-emerald-400">+</button>
+                    <button onclick="adjustPaceScore(-1)" class="w-7 h-7 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs font-bold text-amber-400">-</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- 1.5 MINIMALIST PROGRESS & PACE TRACKER                  -->
+        <!-- ======================================================= -->
+        <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-5 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-xs font-black">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-white">ترازوی هوشمند پیشرفت و همگامی با برنامه</h3>
+                        <p class="text-[11px] text-slate-400" id="progressSummaryText">کل پیشرفت کلی شما: ۰٪ (بر اساس جلسات تثبیت‌شده ماهان)</p>
+                    </div>
+                </div>
+                <div id="overallStatusBadge" class="px-3 py-1 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    همگام با برنامه هدف
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-900/80 rounded-full h-3 p-0.5 border border-slate-700/60 relative overflow-hidden">
+                <div id="overallProgressBar" class="bg-gradient-to-r from-brand-600 to-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+            </div>
+
+            <!-- Detailed Category Breakdowns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1" id="progressCardsContainer">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- 2. TODAY'S FOCUSED SINGLE SUBJECT SPOTLIGHT            -->
+        <!-- ======================================================= -->
+        <div class="today-card-glow bg-gradient-to-l from-emerald-950/40 via-slate-800/80 to-slate-800/90 border border-emerald-500/40 rounded-2xl p-5 relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg font-black shrink-0">
+                        <span id="spotlightDayName">امروز</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300" id="spotlightTodayBadge">امروز شما در این روز هفته قرار دارید</span>
+                            <span class="text-[11px] text-slate-400" id="spotlightWeekInfo">هفته ۱</span>
+                        </div>
+                        <h2 class="text-base sm:text-lg font-black text-white" id="spotlightCourseTitle">اقتصاد کلان ماهان</h2>
+                        <p class="text-xs text-slate-300 mt-0.5 font-medium" id="spotlightExactPart">جلسه ۱ کلان: مفاهیم پایه و حسابداری ملی بخش ۱</p>
+                    </div>
+                </div>
+                <button onclick="toggleTodayDoneFromSpotlight()" id="spotlightDoneBtn" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition shrink-0">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <span>تکمیل برنامه امروز</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- 3. CLEAN TIME SCRUBBER & TIMELINE                       -->
+        <!-- ======================================================= -->
+        <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400">ماشین زمان ۲۷ هفته‌ای (۱ آبان ۱۴۰۵ تا ۱۰ اردیبهشت ۱۴۰۶)</h3>
+                    <p class="text-sm font-black text-white mt-0.5" id="scrubberWeekLabel">هفته ۱ از ۲۷ (فاز ۱: پایه و اساس)</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="stepScrubber(-1)" class="w-7 h-7 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs text-slate-200 font-bold" title="هفته قبل"><i class="fa-solid fa-chevron-right"></i></button>
+                    <span class="text-xs font-bold px-3 py-1 rounded-lg bg-slate-700/80 text-brand-300" id="scrubberDateBadge">
+                        ۱ آبان تا ۷ آبان ۱۴۰۵
+                    </span>
+                    <button onclick="stepScrubber(1)" class="w-7 h-7 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs text-slate-200 font-bold" title="هفته بعد"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="toggleLiveAnimation()" id="liveAnimBtn" class="px-2.5 py-1 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-play" id="animIcon"></i> <span id="animText">جان‌بخشی</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative py-2">
+                <input type="range" id="timeScrubber" min="1" max="27" value="1" oninput="handleScrub(this.value)" class="scrubber-slider w-full relative z-10" />
+            </div>
+
+            <div class="mt-3 p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <strong class="text-brand-400" id="simTitle">محوریت هفته ۱:</strong>
+                        <button onclick="openEditWeekModal()" class="text-slate-400 hover:text-brand-300 text-[11px]"><i class="fa-solid fa-pen"></i> ویرایش هفته</button>
+                    </div>
+                    <span class="text-slate-300 leading-relaxed" id="simDescription">شروع قدرتمند اقتصاد خرد و کلان + ریاضی و آمار مقدماتی</span>
+                </div>
+                <div class="text-left shrink-0">
+                    <span class="text-slate-400 block text-[10px]">هدف ساعت مطالعه:</span>
+                    <strong class="text-white font-bold" id="simWeeklyHours">۳۶ ساعت</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- 4. CLEAN TABS NAVIGATION                                -->
+        <!-- ======================================================= -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 border-b border-slate-800">
+            <button onclick="switchTab('weekly')" id="tab-weekly" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition bg-brand-600 text-white shadow-sm">
+                <i class="fa-solid fa-calendar-day ml-1.5"></i>برنامه روزانه تک‌درسی
+            </button>
+            <button onclick="switchTab('roadmap27')" id="tab-roadmap27" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                <i class="fa-solid fa-map ml-1.5"></i>نقشه ۲۷ هفته‌ای
+            </button>
+            <button onclick="switchTab('videos')" id="tab-videos" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                <i class="fa-solid fa-film ml-1.5"></i>ویدئوهای ماهان (۷۳ جلسه)
+            </button>
+            <button onclick="switchTab('specialized')" id="tab-specialized" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                <i class="fa-solid fa-book-open ml-1.5"></i>۵ درس تخصصی + آمار آنلاین
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: WEEKLY SCHEDULE (SINGLE SUBJECT) -->
+        <div id="view-weekly" class="space-y-4">
+            <div class="flex items-center justify-between bg-slate-800/40 p-3 rounded-xl border border-slate-700/60">
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="font-bold text-slate-400">هفته نمایش:</span>
+                    <select id="dailyWeekSelect" onchange="jumpToWeek(parseInt(this.value, 10))" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-brand-300 font-bold focus:outline-none">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+                <div class="flex items-center gap-1.5 flex-wrap justify-end" id="activeDaySelectorPills">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="space-y-3" id="weeklyScheduleTable">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 2: 27-WEEK ROADMAP -->
+        <div id="view-roadmap27" class="space-y-4 hidden">
+            <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-4 overflow-x-auto">
+                <table class="w-full text-right border-collapse min-w-[850px] text-xs">
+                    <thead>
+                        <tr class="bg-slate-900/80 text-slate-400 font-bold border-b border-slate-700">
+                            <th class="p-3">هفته</th>
+                            <th class="p-3">تاریخ دقیق</th>
+                            <th class="p-3">محوریت اصلی هفته</th>
+                            <th class="p-3">خرد و کلان (۶۵٪)</th>
+                            <th class="p-3">ریاضی و آمار (۲۵٪)</th>
+                            <th class="p-3">تخصصی (۱۰٪)</th>
+                            <th class="p-3 text-center">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800" id="masterRoadmapTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 3: MAHAN VIDEOS -->
+        <div id="view-videos" class="space-y-5 hidden">
+            <div class="bg-slate-800/40 border border-slate-700/60 p-3.5 rounded-xl text-xs text-slate-300 flex items-center justify-between flex-wrap gap-2">
+                <span>🟢 تثبیت‌شده (+ تست) | 🟡 دیده‌شده (نیازمند تست) | ⚪ ندیده</span>
+                <span class="text-slate-400 font-medium">برای تغییر وضعیت روی هر جلسه کلیک کنید. روی مداد کلیک کنید تا یادداشت بنویسید.</span>
+            </div>
+            <div id="course-card-introMath"></div>
+            <div id="course-card-introStats"></div>
+            <div id="course-card-macro"></div>
+            <div id="course-card-micro"></div>
+            <div id="course-card-math"></div>
+        </div>
+
+        <!-- TAB CONTENT 4: SPECIALIZED & LIVE STATS -->
+        <div id="view-specialized" class="space-y-5 hidden">
+            <!-- Online Live Stats -->
+            <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-bold text-slate-200"><i class="fa-solid fa-tower-broadcast text-sky-400 ml-1.5"></i>کلاس آنلاین آمار ماهان (۱۶ هفته زنده)</h3>
+                    <span class="text-xs text-sky-400 font-bold" id="liveStatsProgressBadge">0 از 16</span>
+                </div>
+                <div class="grid grid-cols-4 sm:grid-cols-8 gap-2" id="liveStatsContainer"></div>
+            </div>
+
+            <!-- 5 Specialized Courses -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="specializedCoursesContainer"></div>
+        </div>
+
+    </div>
+
+    <!-- Modals for Note, Edit Week & Cloud Sync -->
+    <div id="noteModal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 space-y-4">
+            <h3 class="font-bold text-sm text-white" id="noteModalTitle">ویرایش جلسه</h3>
+            <input type="text" id="noteModalTopicInput" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white focus:outline-none" />
+            <textarea id="noteModalDescInput" rows="2" placeholder="یادداشت..." class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white focus:outline-none"></textarea>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeNoteModal()" class="px-3 py-1.5 rounded-xl bg-slate-800 text-xs font-bold text-slate-300">انصراف</button>
+                <button onclick="saveSessionNote()" class="px-4 py-1.5 rounded-xl bg-brand-600 text-xs font-bold text-white">ذخیره</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editWeekModal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-5 space-y-4">
+            <h3 class="font-bold text-sm text-white" id="editWeekModalTitle">ویرایش هفته</h3>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="text-slate-400 block mb-1">محوریت اصلی هفته</label>
+                    <input type="text" id="editWeekThemeInput" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none" />
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">تکلیف خرد و کلان (۶۵٪)</label>
+                    <input type="text" id="editWeekMacroInput" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none" />
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">تکلیف ریاضی و آمار (۲۵٪)</label>
+                    <input type="text" id="editWeekMathInput" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none" />
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">تکلیف تخصصی (۱۰٪)</label>
+                    <input type="text" id="editWeekSpecInput" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none" />
+                </div>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeEditWeekModal()" class="px-3 py-1.5 rounded-xl bg-slate-800 text-xs font-bold text-slate-300">انصراف</button>
+                <button onclick="saveWeekEdit()" class="px-4 py-1.5 rounded-xl bg-brand-600 text-xs font-bold text-white">ذخیره تغییرات</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cloudSyncModal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 space-y-4">
+            <h3 class="font-bold text-sm text-white"><i class="fa-solid fa-cloud text-sky-400 ml-1.5"></i>ذخیره‌سازی اطلاعات خودکار</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">اطلاعات این برنامه به‌صورت خودکار فقط در همین مرورگر ذخیره می‌شود. کد زیر اتصال ابری ایجاد نمی‌کند؛ برای انتقال اطلاعات به دستگاه دیگر، باید قابلیت پشتیبان‌گیری و بازیابی اضافه شود.</p>
+            <p class="text-xs text-amber-300">توجه: این نسخه هنوز همگام‌سازی واقعی بین دستگاه‌ها ندارد.</p>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeCloudSyncModal()" class="px-3 py-1.5 rounded-xl bg-slate-800 text-xs font-bold text-slate-300">بستن</button>
+                <button onclick="applySyncCode()" class="px-4 py-1.5 rounded-xl bg-sky-600 text-xs font-bold text-white">ذخیره تنظیمات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-4 left-4 z-50 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none">
+        <div class="bg-slate-800 text-white px-3.5 py-2.5 rounded-xl shadow-lg border border-slate-700 text-xs font-bold flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+            <span id="toastMsg">انجام شد</span>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        window.isEditMode = false;
+        window.activeNoteTarget = null;
+        window.activeEditWeekNum = 1;
+        window.liveAnimInterval = null;
+
+        window.cloudSaveCallback = function() {
+            try {
+                localStorage.setItem('mahan_app_state', JSON.stringify(appState));
+                const indicator = document.getElementById('cloudSyncText');
+                if(indicator) indicator.innerText = 'ذخیره شد ✓';
+                setTimeout(() => { if(indicator) indicator.innerText = 'ذخیره‌سازی اطلاعات'; }, 1500);
+            } catch(e) {}
+        };
+
+        const coursesConfig = {
+            introMath: { id: 'introMath', title: 'ریاضی مقدماتی ماهان', totalSessions: 3, hoursPerSession: 2, icon: 'fa-calculator', defaultTopics: ['اتحادها و معادلات', 'توابع مقدماتی و خط', 'توابع نمایی و لگاریتمی'] },
+            introStats: { id: 'introStats', title: 'آمار مقدماتی ماهان', totalSessions: 4, hoursPerSession: 2, icon: 'fa-chart-pie', defaultTopics: ['آمار توصیفی', 'آنالیز ترکیبی', 'احتمال پایه', 'احتمال شرطی و بیز'] },
+            macro: { id: 'macro', title: 'اقتصاد کلان ماهان', totalSessions: 32, hoursPerSession: 3, icon: 'fa-globe', defaultTopics: Array(32).fill(0).map((_, i) => `مبحث کلان جلسه ${i + 1}`) },
+            micro: { id: 'micro', title: 'اقتصاد خرد ماهان', totalSessions: 13, hoursPerSession: 4, icon: 'fa-scale-balanced', defaultTopics: Array(13).fill(0).map((_, i) => `مبحث خرد جلسه ${i + 1}`) },
+            math: { id: 'math', title: 'ریاضی اصلی ماهان', totalSessions: 21, hoursPerSession: 2.5, icon: 'fa-square-root-variable', defaultTopics: Array(21).fill(0).map((_, i) => `مبحث ریاضی جلسه ${i + 1}`) }
+        };
+
+        const appState = {
+            sessions: {},
+            liveStats: Array(16).fill(0),
+            weekStatus: Array(27).fill(0),
+            paceScoreOffset: 0,
+            specializedCourses: [
+                { name: '۱. تجارت بین‌الملل (۹ فصل)', chapters: [
+                    { title: 'فصل ۱: مقدمه تجارت بین‌الملل', read: false, note: false, test: false },
+                    { title: 'فصل ۲: قانون مزیت نسبی', read: false, note: false, test: false },
+                    { title: 'فصل ۳: نظریه معمول تجارت بین‌الملل', read: false, note: false, test: false },
+                    { title: 'فصل ۴: تقاضا، عرضه، منحنی‌های پیشنهاد و رابطه مبادله', read: false, note: false, test: false },
+                    { title: 'فصل ۵: عوامل تولید و نظریه هکشر-اوهلین', read: false, note: false, test: false },
+                    { title: 'فصل ۶: آزمون‌های تجربی و نظریات تکمیلی تجارت', read: false, note: false, test: false },
+                    { title: 'فصل ۷: رشد اقتصادی و تجارت بین‌الملل', read: false, note: false, test: false },
+                    { title: 'فصل ۸: سیاست‌های بازرگانی', read: false, note: false, test: false },
+                    { title: 'فصل ۹: هم‌پیوندی‌های اقتصادی', read: false, note: false, test: false }
+                ]},
+                { name: '۲. مالیه بین‌الملل (۶ فصل)', chapters: [
+                    { title: 'فصل ۱: بازار ارز', read: false, note: false, test: false },
+                    { title: 'فصل ۲: حساب جاری و حساب سرمایه', read: false, note: false, test: false },
+                    { title: 'فصل ۳: مکانیسم تعدیل قیمت (نرخ ارز ثابت و شناور)', read: false, note: false, test: false },
+                    { title: 'فصل ۴: مکانیسم تعدیل درآمد و تعدیلات خودکار', read: false, note: false, test: false },
+                    { title: 'فصل ۵: تراز پرداخت‌ها از دیدگاه رهیافت پولی', read: false, note: false, test: false },
+                    { title: 'فصل ۶: سیاست‌های تعدیل', read: false, note: false, test: false }
+                ]},
+                { name: '۳. بخش عمومی (۷ فصل)', chapters: [
+                    { title: 'فصل ۱: دولت', read: false, note: false, test: false },
+                    { title: 'فصل ۲: کالاهای عمومی و ازدحام', read: false, note: false, test: false },
+                    { title: 'فصل ۳: رأی‌گیری و انتخاب عمومی', read: false, note: false, test: false },
+                    { title: 'فصل ۴: مالیات', read: false, note: false, test: false },
+                    { title: 'فصل ۵: مالیات‌ها و سوبسیدهای مستقیم و غیرمستقیم', read: false, note: false, test: false },
+                    { title: 'فصل ۶: سایر مالیات‌ها', read: false, note: false, test: false },
+                    { title: 'فصل ۷: تأمین اجتماعی و سیستم حمایتی از فقر', read: false, note: false, test: false }
+                ]},
+                { name: '۴. پول و بانکداری (۷ فصل)', chapters: [
+                    { title: 'فصل ۱: پول', read: false, note: false, test: false },
+                    { title: 'فصل ۲: عرضه پول', read: false, note: false, test: false },
+                    { title: 'فصل ۳: تقاضای پول و نرخ بهره', read: false, note: false, test: false },
+                    { title: 'فصل ۴: بانک و بانکداری', read: false, note: false, test: false },
+                    { title: 'فصل ۵: بانک مرکزی و سیاست‌های پولی', read: false, note: false, test: false },
+                    { title: 'فصل ۶: پول و بانکداری الکترونیکی', read: false, note: false, test: false },
+                    { title: 'فصل ۷: ارز', read: false, note: false, test: false }
+                ]},
+                { name: '۵. اقتصاد اسلامی (جزوه خلاصه شخصی)', chapters: [
+                    { title: 'بخش ۱: کلیات و قواعد فقهی', read: false, note: false, test: false },
+                    { title: 'بخش ۲: مالکیت و توزیع درآمد', read: false, note: false, test: false },
+                    { title: 'بخش ۳: مصرف، مبادلات و جایگاه دولت', read: false, note: false, test: false },
+                    { title: 'بخش ۴: عدالت اقتصادی و نظام مالی اسلامی', read: false, note: false, test: false }
+                ]}
+            ],
+            customDailyPlans: {},
+            customRoadmap: null,
+            manualTodayIndex: null
+        };
+
+        // Load saved state if available
+        try {
+            const saved = localStorage.getItem('mahan_app_state');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed.sessions) appState.sessions = parsed.sessions;
+                if (parsed.liveStats) appState.liveStats = parsed.liveStats;
+                if (parsed.weekStatus) appState.weekStatus = parsed.weekStatus;
+                if (parsed.specializedCourses) appState.specializedCourses = parsed.specializedCourses;
+                if (parsed.customDailyPlans) appState.customDailyPlans = parsed.customDailyPlans;
+                if (parsed.customRoadmap) appState.customRoadmap = parsed.customRoadmap;
+            }
+        } catch(e) {}
+
+        function initSessions() {
+            Object.keys(coursesConfig).forEach(k => {
+                const cfg = coursesConfig[k];
+                if (!appState.sessions[k]) {
+                    appState.sessions[k] = [];
+                    for (let i = 0; i < cfg.totalSessions; i++) {
+                        appState.sessions[k].push({ index: i + 1, status: 0, topic: cfg.defaultTopics[i], note: '' });
+                    }
+                }
+            });
+        }
+
+        const defaultWeeklyRoadmap = Array(27).fill(0).map((_, i) => {
+            const wNum = i + 1;
+            let theme = `فاز مطالعاتی و تسلط بر مباحث هفته ${wNum}`;
+            let macroTask = `کلان: پیشروی جلسات مرتبط`;
+            let microTask = `خرد: پیشروی جلسات مرتبط`;
+            let mathTask = wNum <= 2 ? `ریاضی/آمار مقدماتی` : `ریاضی اصلی و آمار آنلاین`;
+            let specTask = `تخصصی: مطالعه فصل مربوطه`;
+
+            if (wNum === 1) { theme = 'پایه و اساس (ریاضی و آمار مقدماتی + شروع خرد و کلان)'; macroTask = 'کلان: جلسه ۱ و ۲'; microTask = 'خرد: جلسه ۱'; mathTask = 'ریاضی مقدماتی ج ۱ + آمار مقدماتی ج ۱'; specTask = 'تجارت: فصل ۱'; }
+            else if (wNum === 2) { theme = 'استحکام پایه‌ها و استمرار خرد و کلان'; macroTask = 'کلان: جلسه ۳ و ۴'; microTask = 'خرد: جلسه ۲'; mathTask = 'ریاضی مقدماتی ج ۲ + آمار مقدماتی ج ۲'; specTask = 'تجارت: فصل ۲'; }
+            else if (wNum === 3) { theme = 'ورود به مباحث اصلی ریاضی و ادامه کلان/خرد'; macroTask = 'کلان: جلسه ۵ و ۶'; microTask = 'خرد: جلسه ۳'; mathTask = 'ریاضی مقدماتی ج ۳ + آمار مقدماتی ج ۳-۴'; specTask = 'تجارت: فصل ۳'; }
+
+            return {
+                week: wNum,
+                dateRange: `هفته ${wNum} مطالعاتی`,
+                theme: theme,
+                hours: '۳۶ ساعت',
+                targets: [
+                    { name: 'خرد و کلان (۶۵٪)', val: `${macroTask} | ${microTask}` },
+                    { name: 'ریاضی و آمار (۲۵٪)', val: mathTask },
+                    { name: 'تخصصی (۱۰٪)', val: specTask }
+                ]
+            };
+        });
+
+        function getWeeklyRoadmap() {
+            return appState.customRoadmap || defaultWeeklyRoadmap;
+        }
+
+        const persianDaysOfWeek = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
+
+        function getCurrentPersianDayIndex() {
+            if (appState.manualTodayIndex !== null) return appState.manualTodayIndex;
+            const jsDay = new Date().getDay();
+            return (jsDay + 1) % 7;
+        }
+
+        function setActiveTodayIndex(idx) {
+            appState.manualTodayIndex = idx;
+            renderWeeklySchedule();
+            updateTodaySpotlight();
+        }
+
+        function getDailyPlanForWeek(weekNum) {
+            if (!appState.customDailyPlans[weekNum]) {
+                const roadmapItem = getWeeklyRoadmap()[weekNum - 1] || {};
+                appState.customDailyPlans[weekNum] = [
+                    { dayName: 'شنبه', courseTitle: 'اقتصاد کلان ماهان', exactPart: `${roadmapItem.targets?.[0]?.val || 'کلان ماهان'} (مشاهده ویدئو + خلاصه)`, dayCompleted: false },
+                    { dayName: 'یکشنبه', courseTitle: 'اقتصاد خرد ماهان', exactPart: `${roadmapItem.targets?.[0]?.val || 'خرد ماهان'} (مطالعه دقیق + جزوه‌نویسی)`, dayCompleted: false },
+                    { dayName: 'دوشنبه', courseTitle: 'اقتصاد کلان ماهان', exactPart: `${roadmapItem.targets?.[0]?.val || 'کلان ماهان'} + تست‌های تثبیتی`, dayCompleted: false },
+                    { dayName: 'سه‌شنبه', courseTitle: 'اقتصاد خرد ماهان', exactPart: `${roadmapItem.targets?.[0]?.val || 'خرد ماهان'} - حل تست کنکوری خرد و رفع اشکال`, dayCompleted: false },
+                    { dayName: 'چهارشنبه', courseTitle: weekNum <= 2 ? 'ریاضی مقدماتی ماهان' : 'ریاضی اصلی ماهان', exactPart: `${roadmapItem.targets?.[1]?.val || 'ریاضی ماهان'} (پیشروی پارت‌های این هفته)`, dayCompleted: false },
+                    { dayName: 'پنج‌شنبه', courseTitle: weekNum <= 2 ? 'آمار مقدماتی ماهان' : 'آمار آنلاین + تست ریاضی', exactPart: `کلاس آنلاین آمار یا آمار مقدماتی + تست ریاضی`, dayCompleted: false },
+                    { dayName: 'جمعه', courseTitle: '۵ درس تخصصی خودخوان', exactPart: `${roadmapItem.targets?.[2]?.val || 'تخصصی'} - مطالعه فصل مشخص شده + مرور هفتگی`, dayCompleted: false }
+                ];
+            }
+            return appState.customDailyPlans[weekNum];
+        }
+
+        function updateTodaySpotlight() {
+            const week = parseInt(document.getElementById('timeScrubber')?.value || 1, 10);
+            const days = getDailyPlanForWeek(week);
+            const todayIdx = getCurrentPersianDayIndex();
+            const todayObj = days[todayIdx] || days[0];
+
+            document.getElementById('spotlightDayName').innerText = todayObj.dayName;
+            document.getElementById('spotlightWeekInfo').innerText = `هفته ${week}`;
+            document.getElementById('spotlightCourseTitle').innerText = todayObj.courseTitle;
+            document.getElementById('spotlightExactPart').innerText = todayObj.exactPart;
+        }
+
+        function renderWeeklySchedule() {
+            const week = parseInt(document.getElementById('timeScrubber')?.value || 1, 10);
+            const days = getDailyPlanForWeek(week);
+            const todayIdx = getCurrentPersianDayIndex();
+
+            const pillsContainer = document.getElementById('activeDaySelectorPills');
+            let pillsHtml = '';
+            persianDaysOfWeek.forEach((dName, idx) => {
+                const isToday = idx === todayIdx;
+                pillsHtml += `<button onclick="setActiveTodayIndex(${idx})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold ${isToday ? 'bg-emerald-500 text-white shadow-md' : 'bg-slate-800 text-slate-300'}">${dName} ${isToday ? '★' : ''}</button>`;
+            });
+            pillsContainer.innerHTML = pillsHtml;
+
+            const tableContainer = document.getElementById('weeklyScheduleTable');
+            let html = '';
+            days.forEach((d, idx) => {
+                const isToday = idx === todayIdx;
+                html += `
+                    <div class="p-3.5 rounded-xl border ${isToday ? 'bg-emerald-950/40 border-emerald-500/60 today-card-glow' : 'bg-slate-800/40 border-slate-700/60'} flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg ${isToday ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-brand-400'} font-bold text-xs flex items-center justify-center shrink-0">${d.dayName}</span>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-xs font-black text-white">${d.courseTitle}</h4>
+                                    ${isToday ? '<span class="px-1.5 py-0.5 rounded text-[9px] bg-emerald-500/20 text-emerald-300 font-bold">امروز شما در این روز هفته قرار دارید</span>' : ''}
+                                </div>
+                                <p class="text-[11px] text-slate-300 mt-0.5">${d.exactPart}</p>
+                            </div>
+                        </div>
+                        <button onclick="toggleWeeklyDay(${week}, ${idx})" class="px-3 py-1.5 rounded-lg text-xs font-bold ${d.dayCompleted ? 'bg-emerald-600 text-white shadow' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'} shrink-0">
+                            ${d.dayCompleted ? 'تکمیل ✓' : 'انجام شد'}
+                        </button>
+                    </div>
+                `;
+            });
+            tableContainer.innerHTML = html;
+            updateTodaySpotlight();
+        }
+
+        function toggleTodayDoneFromSpotlight() {
+            const week = parseInt(document.getElementById('timeScrubber')?.value || 1, 10);
+            const idx = getCurrentPersianDayIndex();
+            toggleWeeklyDay(week, idx);
+            const days = getDailyPlanForWeek(week);
+            const item = days[idx] || days[0];
+            const btn = document.getElementById('spotlightDoneBtn');
+            if (btn && item) {
+                btn.innerHTML = item.dayCompleted
+                    ? '<i class="fa-solid fa-circle-check"></i><span>برنامه امروز تکمیل شد</span>'
+                    : '<i class="fa-regular fa-circle-check"></i><span>تکمیل برنامه امروز</span>';
+            }
+        }
+
+        function toggleWeeklyDay(week, dayIdx) {
+            const days = getDailyPlanForWeek(week);
+            days[dayIdx].dayCompleted = !days[dayIdx].dayCompleted;
+            renderWeeklySchedule();
+            updateProgressMetrics();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+            showToast('وضعیت برنامه روز ذخیره شد');
+        }
+
+        function handleScrub(weekVal) {
+            const week = parseInt(weekVal, 10);
+            const roadmap = getWeeklyRoadmap();
+            const data = roadmap[week - 1] || roadmap[0];
+
+            document.getElementById('scrubberWeekLabel').innerText = `هفته ${week} از ۲۷`;
+            document.getElementById('scrubberDateBadge').innerText = data.dateRange;
+            document.getElementById('simTitle').innerText = `محوریت هفته ${week}:`;
+            document.getElementById('simDescription').innerText = data.theme;
+            document.getElementById('simWeeklyHours').innerText = data.hours;
+
+            renderWeeklySchedule();
+        }
+
+        function stepScrubber(dir) {
+            const scrubber = document.getElementById('timeScrubber');
+            let val = parseInt(scrubber.value, 10) + dir;
+            if (val < 1) val = 1;
+            if (val > 27) val = 27;
+            scrubber.value = val;
+            handleScrub(val);
+        }
+
+        function toggleLiveAnimation() {
+            const btnText = document.getElementById('animText');
+            const icon = document.getElementById('animIcon');
+            if (window.liveAnimInterval) {
+                clearInterval(window.liveAnimInterval);
+                window.liveAnimInterval = null;
+                btnText.innerText = 'جان‌بخشی';
+                icon.className = 'fa-solid fa-play';
+                showToast('توقف ماشین زمان');
+            } else {
+                btnText.innerText = 'توقف';
+                icon.className = 'fa-solid fa-pause';
+                showToast('شروع حرکت خودکار ماشین زمان');
+                window.liveAnimInterval = setInterval(() => {
+                    const scrubber = document.getElementById('timeScrubber');
+                    let val = parseInt(scrubber.value, 10) + 1;
+                    if (val > 27) val = 1;
+                    scrubber.value = val;
+                    handleScrub(val);
+                }, 2000);
+            }
+        }
+
+        function jumpToWeek(w) {
+            document.getElementById('timeScrubber').value = w;
+            handleScrub(w);
+        }
+
+        function renderMasterRoadmap() {
+            const tbody = document.getElementById('masterRoadmapTableBody');
+            if(!tbody) return;
+            const roadmap = getWeeklyRoadmap();
+            let html = '';
+            roadmap.forEach((w) => {
+                html += `
+                    <tr class="hover:bg-slate-800/50 cursor-pointer transition" onclick="jumpToWeek(${w.week})">
+                        <td class="p-3 font-bold text-brand-400">هفته ${w.week}</td>
+                        <td class="p-3 text-slate-300">${w.dateRange}</td>
+                        <td class="p-3 text-white font-medium">${w.theme}</td>
+                        <td class="p-3 text-slate-300">${w.targets[0].val}</td>
+                        <td class="p-3 text-slate-300">${w.targets[1].val}</td>
+                        <td class="p-3 text-purple-300">${w.targets[2].val}</td>
+                        <td class="p-3 text-center">
+                            <div class="flex items-center justify-center gap-1.5">
+                                <button onclick="event.stopPropagation(); jumpToWeek(${w.week}); switchTab('weekly');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-brand-300 text-[11px] font-bold">برنامه</button>
+                                <button onclick="event.stopPropagation(); openEditWeekModal(${w.week});" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px]" title="ویرایش"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function openEditWeekModal(weekNum) {
+            window.activeEditWeekNum = weekNum || parseInt(document.getElementById('timeScrubber')?.value || 1, 10);
+            const roadmap = getWeeklyRoadmap();
+            const wData = roadmap[window.activeEditWeekNum - 1];
+            document.getElementById('editWeekModalTitle').innerText = `ویرایش هفته ${window.activeEditWeekNum}`;
+            document.getElementById('editWeekThemeInput').value = wData.theme;
+            document.getElementById('editWeekMacroInput').value = wData.targets[0].val;
+            document.getElementById('editWeekMathInput').value = wData.targets[1].val;
+            document.getElementById('editWeekSpecInput').value = wData.targets[2].val;
+            document.getElementById('editWeekModal').classList.remove('hidden');
+            document.getElementById('editWeekModal').classList.add('flex');
+        }
+
+        function closeEditWeekModal() {
+            document.getElementById('editWeekModal').classList.add('hidden');
+            document.getElementById('editWeekModal').classList.remove('flex');
+        }
+
+        function saveWeekEdit() {
+            if (!appState.customRoadmap) {
+                appState.customRoadmap = JSON.parse(JSON.stringify(defaultWeeklyRoadmap));
+            }
+            const wData = appState.customRoadmap[window.activeEditWeekNum - 1];
+            wData.theme = document.getElementById('editWeekThemeInput').value;
+            wData.targets[0].val = document.getElementById('editWeekMacroInput').value;
+            wData.targets[1].val = document.getElementById('editWeekMathInput').value;
+            wData.targets[2].val = document.getElementById('editWeekSpecInput').value;
+
+            closeEditWeekModal();
+            renderMasterRoadmap();
+            handleScrub(window.activeEditWeekNum);
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+            showToast('هفته با موفقیت ویرایش شد');
+        }
+
+        function renderAllVideos() {
+            Object.keys(coursesConfig).forEach(k => {
+                const cfg = coursesConfig[k];
+                const list = appState.sessions[k] || [];
+                const container = document.getElementById(`course-card-${k}`);
+                if (!container) return;
+
+                let cells = '';
+                list.forEach((s, idx) => {
+                    let bg = 'bg-slate-800/60 border-slate-700 text-slate-300';
+                    if (s.status === 1) bg = 'bg-amber-500/20 border-amber-500/40 text-amber-200';
+                    if (s.status === 2) bg = 'bg-emerald-500/20 border-emerald-500/40 text-emerald-200';
+
+                    cells += `
+                        <div class="p-2.5 rounded-xl border ${bg} text-xs flex flex-col justify-between gap-2">
+                            <div class="flex items-center justify-between cursor-pointer" onclick="cycleSession('${k}', ${idx})">
+                                <span class="font-bold">جلسه ${s.index}</span>
+                                <span class="text-[10px] px-1.5 py-0.5 rounded ${s.status === 2 ? 'bg-emerald-500/30 text-emerald-300' : s.status === 1 ? 'bg-amber-500/30 text-amber-300' : 'bg-slate-700 text-slate-400'}">
+                                    ${s.status === 2 ? 'تثبیت ✓' : s.status === 1 ? 'دیده‌شده 🟡' : 'ندیده ⚪'}
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between pt-1 border-t border-slate-700/50 text-[11px]">
+                                <span class="truncate opacity-90">${s.topic}</span>
+                                <button onclick="openNoteModal('${k}', ${idx})" class="text-slate-400 hover:text-brand-300"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = `
+                    <div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-bold text-sm text-white flex items-center gap-2"><i class="fa-solid ${cfg.icon} text-brand-400"></i>${cfg.title}</h4>
+                            <span class="text-xs text-slate-400">${cfg.totalSessions} جلسه</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">${cells}</div>
+                    </div>
+                `;
+            });
+            updateProgressMetrics();
+        }
+
+        function cycleSession(k, idx) {
+            const s = appState.sessions[k][idx];
+            s.status = (s.status + 1) % 3;
+            renderAllVideos();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+            showToast('وضعیت جلسه به‌روز شد');
+        }
+
+        function openNoteModal(k, idx) {
+            window.activeNoteTarget = { course: k, index: idx };
+            const s = appState.sessions[k][idx];
+            document.getElementById('noteModalTitle').innerText = `ویرایش جلسه ${s.index} (${coursesConfig[k].title})`;
+            document.getElementById('noteModalTopicInput').value = s.topic;
+            document.getElementById('noteModalDescInput').value = s.note || '';
+            document.getElementById('noteModal').classList.remove('hidden');
+            document.getElementById('noteModal').classList.add('flex');
+        }
+
+        function closeNoteModal() {
+            document.getElementById('noteModal').classList.add('hidden');
+            document.getElementById('noteModal').classList.remove('flex');
+        }
+
+        function saveSessionNote() {
+            if (!window.activeNoteTarget) return;
+            const { course, index } = window.activeNoteTarget;
+            const s = appState.sessions[course][index];
+            s.topic = document.getElementById('noteModalTopicInput').value;
+            s.note = document.getElementById('noteModalDescInput').value;
+            closeNoteModal();
+            renderAllVideos();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+            showToast('تغییرات ذخیره شد');
+        }
+
+        function renderSpecialized() {
+            const container = document.getElementById('specializedCoursesContainer');
+            if(!container) return;
+            let html = '';
+            appState.specializedCourses.forEach((c, cIdx) => {
+                let chs = '';
+                c.chapters.forEach((ch, chIdx) => {
+                    chs += `
+                        <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-xs">
+                            <span class="text-slate-200">${ch.title}</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="toggleSpec(${cIdx}, ${chIdx}, 'read')" class="px-2 py-0.5 rounded text-[10px] font-bold ${ch.read ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-400'}">مطالعه</button>
+                                <button onclick="toggleSpec(${cIdx}, ${chIdx}, 'note')" class="px-2 py-0.5 rounded text-[10px] font-bold ${ch.note ? 'bg-purple-600 text-white' : 'bg-slate-800 text-slate-400'}">جزوه</button>
+                                <button onclick="toggleSpec(${cIdx}, ${chIdx}, 'test')" class="px-2 py-0.5 rounded text-[10px] font-bold ${ch.test ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'}">تست</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `<div class="bg-slate-800/50 border border-slate-700/80 rounded-2xl p-4 space-y-3"><h4 class="font-bold text-xs text-brand-300">${c.name}</h4><div class="space-y-1.5">${chs}</div></div>`;
+            });
+            container.innerHTML = html;
+
+            // Live stats
+            const liveContainer = document.getElementById('liveStatsContainer');
+            if(!liveContainer) return;
+            let liveHtml = '';
+            let completedLive = 0;
+            appState.liveStats.forEach((st, i) => {
+                if (st > 0) completedLive++;
+                liveHtml += `<button onclick="cycleLive(${i})" class="p-2 rounded-xl border ${st > 0 ? 'bg-sky-500/20 border-sky-500/40 text-sky-200' : 'bg-slate-800 border-slate-700 text-slate-400'} text-xs font-bold text-center">هفته ${i + 1}</button>`;
+            });
+            liveContainer.innerHTML = liveHtml;
+            const badge = document.getElementById('liveStatsProgressBadge');
+            if(badge) badge.innerText = `${completedLive} از ۱۶`;
+            updateProgressMetrics();
+        }
+
+        function toggleSpec(cIdx, chIdx, field) {
+            const ch = appState.specializedCourses[cIdx].chapters[chIdx];
+            ch[field] = !ch[field];
+            renderSpecialized();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+        }
+
+        function cycleLive(i) {
+            appState.liveStats[i] = (appState.liveStats[i] + 1) % 3;
+            renderSpecialized();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+        }
+
+        function updateProgressMetrics() {
+            let totalSessionsCount = 0;
+            let completedSessionsCount = 0;
+            Object.keys(appState.sessions).forEach(k => {
+                appState.sessions[k].forEach(s => {
+                    totalSessionsCount++;
+                    if (s.status === 2) completedSessionsCount++;
+                });
+            });
+
+            let totalSpecChapters = 0;
+            let completedSpecChapters = 0;
+            appState.specializedCourses.forEach(c => {
+                c.chapters.forEach(ch => {
+                    totalSpecChapters++;
+                    if (ch.read && ch.test) completedSpecChapters++;
+                });
+            });
+
+            const overallPct = totalSessionsCount > 0 ? Math.round((completedSessionsCount / totalSessionsCount) * 100) : 0;
+            const bar = document.getElementById('overallProgressBar');
+            if(bar) bar.style.width = overallPct + '%';
+
+            const summary = document.getElementById('progressSummaryText');
+            if(summary) summary.innerText = `کل پیشرفت کلی شما: ${overallPct}% (${completedSessionsCount} از ${totalSessionsCount} جلسه تثبیت‌شده ماهان)`;
+
+            const currentWeek = parseInt(document.getElementById('timeScrubber')?.value || 1, 10);
+            const expectedCompleted = currentWeek * 3;
+            const diff = completedSessionsCount - expectedCompleted + appState.paceScoreOffset;
+
+            const badge = document.getElementById('overallStatusBadge');
+            if(badge) {
+                if(diff > 2) {
+                    badge.className = 'px-3 py-1 rounded-xl text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30';
+                    badge.innerText = '🚀 جلوتر از برنامه هدف';
+                } else if(diff < -3) {
+                    badge.className = 'px-3 py-1 rounded-xl text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                    badge.innerText = '⏳ کمی عقب‌تر (نیازمند جبران)';
+                } else {
+                    badge.className = 'px-3 py-1 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                    badge.innerText = 'همگام با برنامه هدف ✓';
+                }
+            }
+
+            const cardsContainer = document.getElementById('progressCardsContainer');
+            if(cardsContainer) {
+                const macroDone = appState.sessions['macro']?.filter(s => s.status === 2).length || 0;
+                const microDone = appState.sessions['micro']?.filter(s => s.status === 2).length || 0;
+                const mathDone = (appState.sessions['math']?.filter(s => s.status === 2).length || 0) + (appState.sessions['introMath']?.filter(s => s.status === 2).length || 0);
+
+                cardsContainer.innerHTML = `
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs space-y-1">
+                        <div class="flex items-center justify-between text-slate-400 font-bold">
+                            <span>اقتصاد کلان (۳۲ جلسه)</span>
+                            <span class="text-brand-400">${macroDone}/32</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-brand-500 h-full" style="width: ${(macroDone/32)*100}%"></div></div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs space-y-1">
+                        <div class="flex items-center justify-between text-slate-400 font-bold">
+                            <span>اقتصاد خرد (۱۳ جلسه)</span>
+                            <span class="text-emerald-400">${microDone}/13</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full" style="width: ${(microDone/13)*100}%"></div></div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs space-y-1">
+                        <div class="flex items-center justify-between text-slate-400 font-bold">
+                            <span>ریاضی و آمار</span>
+                            <span class="text-sky-400">${mathDone}/24</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-sky-500 h-full" style="width: ${(mathDone/24)*100}%"></div></div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs space-y-1">
+                        <div class="flex items-center justify-between text-slate-400 font-bold">
+                            <span>۵ درس تخصصی</span>
+                            <span class="text-purple-400">${completedSpecChapters}/${totalSpecChapters}</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-purple-500 h-full" style="width: ${(completedSpecChapters/totalSpecChapters)*100}%"></div></div>
+                    </div>
+                `;
+            }
+        }
+
+        function adjustPaceScore(val) {
+            appState.paceScoreOffset += val;
+            updatePaceDisplay();
+            updateProgressMetrics();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+            showToast('وضعیت همگامی به‌روز شد');
+        }
+
+        function updatePaceDisplay() {
+            const badge = document.getElementById('paceStatusBadge');
+            const sub = document.getElementById('paceSubtitleText');
+            if(!badge || !sub) return;
+            if (appState.paceScoreOffset > 0) {
+                badge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30';
+                badge.innerText = '🚀 جلوتر از برنامه';
+                sub.innerText = `پیشتاز با ${appState.paceScoreOffset} واحد`;
+            } else if (appState.paceScoreOffset < 0) {
+                badge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                badge.innerText = '⏳ نیازمند جبران';
+                sub.innerText = `کمی عقب‌تر (${appState.paceScoreOffset})`;
+            } else {
+                badge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                badge.innerText = 'همگام با برنامه ✓';
+                sub.innerText = 'وزن ۶۵-۲۵-۱۰';
+            }
+        }
+
+        function switchTab(id) {
+            ['weekly', 'roadmap27', 'videos', 'specialized'].forEach(t => {
+                const view = document.getElementById(`view-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                if (!view || !btn) return;
+                if (t === id) {
+                    view.classList.remove('hidden');
+                    btn.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition bg-brand-600 text-white shadow-sm';
+                } else {
+                    view.classList.add('hidden');
+                    btn.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition bg-slate-800 text-slate-300 hover:bg-slate-700';
+                }
+            });
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            const icon = document.getElementById('themeIcon');
+            if(icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            showToast('تغییر حالت نمایش');
+        }
+
+        function toggleEditMode() {
+            window.isEditMode = !window.isEditMode;
+            document.getElementById('editModeText').innerText = window.isEditMode ? 'حالت ویرایش فعال' : 'حالت ویرایش';
+            showToast(window.isEditMode ? 'حالت ویرایش فعال شد' : 'حالت ویرایش غیرفعال شد');
+        }
+
+        function openCloudSyncModal() {
+            document.getElementById('cloudSyncModal').classList.remove('hidden');
+            document.getElementById('cloudSyncModal').classList.add('flex');
+        }
+
+        function closeCloudSyncModal() {
+            document.getElementById('cloudSyncModal').classList.add('hidden');
+            document.getElementById('cloudSyncModal').classList.remove('flex');
+        }
+
+        function applySyncCode() {
+            closeCloudSyncModal();
+            if (typeof window.cloudSaveCallback === 'function') window.cloudSaveCallback();
+            showToast('تنظیمات ذخیره‌سازی اطلاعات ذخیره شد');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            t.classList.remove('translate-y-16', 'opacity-0');
+            setTimeout(() => t.classList.add('translate-y-16', 'opacity-0'), 2200);
+        }
+
+        function initCountdown() {
+            const examTime = Date.UTC(2027, 4, 6, 4, 30, 0); // May 6, 2027
+            setInterval(() => {
+                const diff = Math.max(0, examTime - Date.now());
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / (1000 * 60)) % 60);
+                const s = Math.floor((diff / 1000) % 60);
+                if (document.getElementById('cdDays')) document.getElementById('cdDays').innerText = String(d).padStart(3, '0');
+                if (document.getElementById('cdHours')) document.getElementById('cdHours').innerText = String(h).padStart(2, '0');
+                if (document.getElementById('cdMinutes')) document.getElementById('cdMinutes').innerText = String(m).padStart(2, '0');
+                if (document.getElementById('cdSeconds')) document.getElementById('cdSeconds').innerText = String(s).padStart(2, '0');
+            }, 1000);
+        }
+
+        function populateSelects() {
+            const sel = document.getElementById('dailyWeekSelect');
+            if(!sel) return;
+            let opts = '';
+            for(let i=1; i<=27; i++) {
+                opts += `<option value="${i}">هفته ${i} از ۲۷</option>`;
+            }
+            sel.innerHTML = opts;
+        }
+
+        function init() {
+            initSessions();
+            initCountdown();
+            populateSelects();
+            renderMasterRoadmap();
+            renderAllVideos();
+            renderSpecialized();
+            handleScrub(1);
+            updatePaceDisplay();
+            updateProgressMetrics();
+        }
+
+        init();
+    </script>
+</body>
+</html>
 <meta name="description" content="فضای شخصی برای برنامه‌ریزی مطالعه و پیگیری پیشرفت.">
 <style>
 :root{color-scheme:dark;--bg:#0b1020;--panel:#121a2c;--line:#25314a;--text:#eef2ff;--muted:#9aa8c2;--accent:#a7f3d0}
